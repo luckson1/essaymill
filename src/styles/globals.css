@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+h5 {
+  color: #bf1650;
+}
+
+h5::before {
+  display: inline;
+  content: "⚠ ";
+}
+s
+
