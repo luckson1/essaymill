@@ -2,7 +2,7 @@ import React from 'react'
 
 const Landing = () => {
   return (
-    <div className="w-full md:w-3/5  text-center ">
+    <div className="w-full md:w-2/5  text-center ">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"

@@ -56,10 +56,10 @@ const { field } = useController({ name:"files", control});
 
 
   return (
-    <div className="card h-fit w-[95%] bg-base-100  max-w-4xl my-6 shadow-lg shadow-accent">
+    <div className="card h-fit w-fit bg-base-100  max-w-4xl my-6 shadow-lg shadow-accent mx-auto">
     <div className="card-body">
       <form
-        className="grid w-full  grid-cols-1 md:grid-cols-2 justify-center item-center mx-auto"
+        className="grid w-full  grid-cols-1 md:grid-cols-2 justify-center md:gap-x-6 item-center mx-auto"
         // onSubmit={handleSubmit((data) => {
         //   console.log(data);
          
@@ -365,7 +365,7 @@ name="deadline"
             />
           </label>
         </div>
-        <div className="form-control w-full max-w-xs my-4">
+        <div className="form-control w-full max-w-xs ">
           <label className="label">
             <span className="label-text">
        Attach any project files
