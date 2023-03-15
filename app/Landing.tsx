@@ -6,8 +6,8 @@ const Landing = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
-    className='w-[320px] lg:w-[500px]'
-      height="500.99856"
+      className='w-[320px] lg:w-[500px] h-[320px] md:h-[500px]'
+     
       viewBox="0 0 882.34637 783.99856"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
