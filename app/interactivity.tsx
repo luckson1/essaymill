@@ -17,7 +17,7 @@ const [animationParent] = useAutoAnimate()
   <p className="text-3xl md:text-6xl text-base-100">ORIGINAL ACADEMIC
 WRITING ON DEMAND</p>
 <p className="text-xl italic text-base-100">Any Subject. Brilliant Writers. No AI or Plagiarism.</p>
-  <button className="btn btn-primary w-full max-w-xs relative" onClick={()=> setIsShowForm(true)}>Order</button></div>
+  <button className="btn btn-accent w-full max-w-xs relative" onClick={()=> setIsShowForm(true)}>Order</button></div>
      <Landing />
  </div>}
 
