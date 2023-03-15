@@ -7,8 +7,11 @@
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env.mjs"));
 
 /** @type {import("next").NextConfig} */
-const config = {
+const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    appDir: true,
+  },
 
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you
@@ -21,4 +24,4 @@ const config = {
     defaultLocale: "en",
   },
 };
-export default config;
+module.exports = nextConfig;
