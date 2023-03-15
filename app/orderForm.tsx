@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Dropzone from "~/components/Dropezone";
 import BasicDateTimePicker from "~/components/datepicker";
 import { z } from 'zod';
-import { api } from '~/utils/api';
 import moment from 'moment';
+import { type Subject } from '@prisma/client';
 export const onboardingSchema = z.object({
   firstName: z.string().nonempty("First Name Required!").min(3, {message:"Too Short!"}),
   lastName: z.string().nonempty("Last Name Required!").min(3, {message:"Too Short!"}),
@@ -33,14 +33,14 @@ export const onboardingSchema = z.object({
 });
 
 export type Values = z.infer<typeof onboardingSchema>;
-const Order = ({setIsShowForm}: { setIsShowForm: Dispatch<SetStateAction<boolean>>}) => {
+const Order = ({setIsShowForm, subjects}: { setIsShowForm: Dispatch<SetStateAction<boolean>>, subjects: Subject[]}) => {
 
     const {
         control,
         register,
         handleSubmit,
         
-        watch,
+       
         formState: { errors },
       } = useForm<Values>({
         resolver: zodResolver(onboardingSchema),
@@ -53,8 +53,8 @@ const Order = ({setIsShowForm}: { setIsShowForm: Dispatch<SetStateAction<boolean
 
 
 const { field } = useController({ name:"files", control});
-watch((data)=>console.log(data))
-const {data:subjects}=api.subject.getall.useQuery()
+
+
   return (
     <div className="card h-fit w-[95%] bg-base-100  max-w-4xl my-16 shadow-lg shadow-accent">
     <div className="card-body">
