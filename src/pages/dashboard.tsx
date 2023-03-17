@@ -1,8 +1,11 @@
 import React from 'react'
+import Comingsoon from '~/components/svgs/CommingSoon'
 
 const dashboard = () => {
   return (
-    <div className='my-32 text-3xl'>dashboard</div>
+<>
+<Comingsoon />
+</>
   )
 }
 

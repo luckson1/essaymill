@@ -4,7 +4,7 @@ const progress = () => {
   return (
     <div className='w-full h-fit my-12 flex flex-col items-center gap-8 justify-center'>
     <div className="overflow-x-auto">
-      <table className="table w-full  max-w-4xl">
+      <table className="table static w-full  max-w-4xl">
         {/* head */}
         <thead>
              <tr className="hover">
