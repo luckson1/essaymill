@@ -56,7 +56,7 @@ const { field } = useController({ name:"files", control});
 
 
   return (
-    <div className="card h-fit w-full bg-base-100  max-w-4xl my-6 shadow-lg shadow-accent mx-auto">
+    <div className="card h-fit w-full bg-base-100  max-w-4xl my-6 shadow-lg shadow-accent mx-auto z-[1000]">
     <div className="card-body">
       <form
         className="grid w-full  grid-cols-1 md:grid-cols-2 justify-center md:gap-x-6 item-center mx-auto"
