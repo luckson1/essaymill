@@ -1,27 +1,31 @@
 
-
 import '../src/styles/globals.css'
+import Nav from './Nav'
 
 export const metadata = {
   title: 'Essaysdoctor',
   description: "Quality custom essays",
 }
 
-export default function RootLayout({
+
+export default  function RootLayout({
   children,
+  
 }: {
   children: React.ReactNode
+
 }) {
- 
+
+
   return (
   
     <html data-theme="winter" lang='en'>
 
 
     <body>
-    <div className='flex flex-col justify-center items-start bg-gradient-to-b from-[#2e026d] to-[#15162c] mx-auto'>
-    <div className="flex w-full md:w-[90%] lg:w-[80%] flex-col justify-center items-center ">
-{/* <NavBar /> */}
+    <div className='flex flex-col justify-center items-start w-screen'>
+    <div className="flex w-full flex-col justify-center items-center ">
+<Nav />
       
       {children}
       </div></div>
