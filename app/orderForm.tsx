@@ -394,7 +394,7 @@ name="deadline"
             />
           </label>
         </div>
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control w-full max-w-xs mt-4">
           <button className="btn-primary btn" role='submit'>Submit</button>
         </div>
         <div className="form-control w-full max-w-xs mt-4">
