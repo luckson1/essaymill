@@ -3,7 +3,7 @@ import { MdOutlineCancel } from 'react-icons/md';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { GiScrollUnfurled } from 'react-icons/gi';
-import { CgProfile} from 'react-icons/cg';
+import { BiMessageRoundedDetail} from 'react-icons/bi';
 import { AiOutlineFileDone, AiOutlineHome } from 'react-icons/ai'
 import { RiDraftLine } from 'react-icons/ri'
 import {GrInProgress} from 'react-icons/gr'
@@ -37,6 +37,11 @@ export const SideBar = ({handleMenu}: NavProps) => {
               path: "/progress"
             },
             {
+              name: "On Revision",
+              icon: AiOutlineFileDone,
+              path: "/revision"
+            },
+            {
               name: "Done",
               icon: AiOutlineFileDone,
               path: "/done"
@@ -49,9 +54,9 @@ export const SideBar = ({handleMenu}: NavProps) => {
           title: "Account",
           links: [
             {
-              name: "profile",
-              icon: CgProfile,
-              path: "/profile"
+              name: "Messenger",
+              icon: BiMessageRoundedDetail,
+              path: "/messenger"
             },
           ],
         },
