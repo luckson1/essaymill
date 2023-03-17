@@ -52,6 +52,8 @@ model User {
     accounts      Account[]
     sessions      Session[]
     Project       Project[]
+    Files         File[]
+    Message       Message[]
 }
 
 model Subject {
@@ -90,20 +92,68 @@ enum Format {
     None
 }
 
+enum Status {
+    draft
+    progress
+    revision
+    review
+    complete
+    closed
+    cancelled
+}
+
+enum fileType {
+    customerFile
+    DraftFIle
+    FinalFile
+}
+
 model Project {
     id          String @id @default(cuid())
-    topic      String @db.Text
+    topic       String @db.Text
     description String @db.Text
     user        User   @relation(fields: [userId], references: [id])
 
-    userId    String
-    subject   Subject @relation(fields: [subjectId], references: [id])
-    subjectId String
-    country String
+    userId        String
+    subject       Subject   @relation(fields: [subjectId], references: [id])
+    subjectId     String
+    country       String
     academicLevel Level
-    format Format
-    pages Int
-    typeOfPaper Type
-    deadline String
+    format        Format
+    pages         Int
+    typeOfPaper   Type
+    deadline      String
+    status        Status    @default(draft)
+    isPaid        Boolean   @default(false)
+    orderNumber   Int       @default(autoincrement())
+    deleted       Boolean   @default(false)
+    Files         File[]
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+    Message       Message[]
+}
 
+model File {
+    id      String  @id @default(cuid())
+    project Project @relation(fields: [projectId], references: [id])
+
+    projectId String
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+    deleted   Boolean  @default(false)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    type      fileType
+}
+
+model Message {
+    id      String  @id @default(cuid())
+    body String @db.Text
+    project Project @relation(fields: [projectId], references: [id])
+
+    projectId String
+    creator      User     @relation(fields: [userId], references: [id])
+    userId    String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
