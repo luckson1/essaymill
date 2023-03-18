@@ -14,7 +14,7 @@ export const onboardingSchema = z.object({
   typeOfPaper: z.enum(["essay", "researchPaper", "dissertation"]),
   format: z.enum(["Chicago", "APA", "MLA", "Havard", "Other", "No", "None"]),
 });
-export const subjectRouter = createTRPCRouter({
+export const onboardingRouter = createTRPCRouter({
   onboarding: publicProcedure
     .input(onboardingSchema)
     .mutation(async ({ input, ctx }) => {

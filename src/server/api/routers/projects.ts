@@ -11,7 +11,7 @@ export const productSchema = z.object({
   typeOfPaper: z.enum(["essay", "researchPaper", "dissertation"]),
   format: z.enum(["Chicago", "APA", "MLA", "Havard", "Other", "No", "None"]),
 });
-export const productRouter = createTRPCRouter({
+export const projectRouter = createTRPCRouter({
   addProduct: protectedProcedure
     .input(productSchema)
     .mutation(async ({ input, ctx }) => {
