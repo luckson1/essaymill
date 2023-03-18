@@ -1,4 +1,8 @@
 import { createTRPCRouter } from "~/server/api/trpc";
+import { fileRouter } from "./routers/files";
+import { messageRouter } from "./routers/messages";
+import { onboardingRouter } from "./routers/onboarding";
+import { projectRouter } from "./routers/projects";
 
 import { subjectRouter } from "./routers/subjects";
 
@@ -9,6 +13,10 @@ import { subjectRouter } from "./routers/subjects";
  */
 export const appRouter = createTRPCRouter({
   subject: subjectRouter,
+ file:fileRouter,
+ message: messageRouter,
+ onboarding: onboardingRouter,
+project:projectRouter,
 });
 
 // export type definition of API
