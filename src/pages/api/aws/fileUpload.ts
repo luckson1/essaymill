@@ -29,14 +29,14 @@ try {
     // make entries to image table for the product images
    
   if (userId) {
-  const image = await prisma.file.create({
+  const file = await prisma.file.create({
     data: {
       userId,
       projectId,
     type
     },})
   
-    const Key = image.id;
+    const Key = file.id;
   
     const s3Params = {
       Bucket: env.BUCKET_NAME,
