@@ -2,7 +2,7 @@
 'use client'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import React, { useState } from 'react'
-import Order from 'app/orderForm'
+import Order from '~/app/orderForm'
 import Landing from './Landing'
 import { type Subject } from '@prisma/client'
 

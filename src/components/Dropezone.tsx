@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import type { ControllerRenderProps, Noop,} from "react-hook-form";
 import { BsCloudUpload } from "react-icons/bs";
-import { type Values } from "../../app/orderForm";
+import { type Values } from "../app/orderForm";
 
 const Dropzone=({ field, onBlur, }: {
   onBlur: Noop,

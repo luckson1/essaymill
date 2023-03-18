@@ -55,7 +55,7 @@ const Navbar = () => {
                 </Link>
            
             {  authenticated &&  <Link
-                  href={"/dashboard"}
+                  href={"/drafts"}
                   onClick={() => setIsOpenMenu(!isOpenMenu)}
                   className= {` w-32 text-start md:text-center hover:inline-block transition ease-in-out delay-150 cursor-pointer rounded-xl  py-2 px-4 font-light no-underline hover:-translate-y-1 hover:scale-105 hover:bg-slate-100`}
                 >
