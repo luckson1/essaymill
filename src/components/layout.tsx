@@ -41,7 +41,7 @@ const Layout = ({children}:{children:ReactNode}) => {
   
         <div
           className={`  min-h-screen w-full ${
-            activeMenu ? "ml-72" : " flex-2 ml-8"
+            activeMenu ? "ml-72" : " flex-2 mx-4"
           }`}
         >
           <div className="fixed  w-full">
