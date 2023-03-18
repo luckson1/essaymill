@@ -6,7 +6,7 @@ import React, { useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { MdClose, MdMenu } from 'react-icons/md';
-export const links: string[]=[ "How it Works", "Blog"]
+
 
 const Navbar = () => {
     const router=useRouter()
@@ -30,10 +30,10 @@ const Navbar = () => {
         className={` focus:shadow-outline my-4 ml-5 transform cursor-pointer  transition duration-300 ease-in-out hover:scale-150 focus:outline-none`}
       />
     </div>
-    <div className="flex  flex-col w-full  md:w-[90%] md:flex-row justify-between bg-neutral md:bg-inherit px-6 md:px-0">
+    <div className={`flex  flex-col w-full  md:w-[90%] md:flex-row justify-between ${isOpenMenu? "bg-neutral mt-32": "bg-inherit"} md:mt-0 md:bg-inherit px-6 md:px-0`}>
       <div className="mt-0 mr-12 flex  flex-row  items-center justify-start py-2 w-full md:w-4/5 md:flex-col">
         <div
-          className={`w-full mx-auto  mt-24 md:mt-0 bg-inherit flex-row md:flex justify-center  md:items-center md:gap-20 ${
+          className={`w-full mx-auto  md:mt-0 bg-inherit flex-row md:flex justify-center  md:items-center md:gap-20 ${
             isOpenMenu ? "" : "hidden"
           } z-10    md:mt-0 md:p-0 `}
         >
@@ -93,7 +93,7 @@ const Navbar = () => {
         </button>
       </div>
     </div>
-    <div className="my-4 block justify-end pr-4  md:flex lg:hidden">
+    <div className="my-4 justify-end pr-4  flex md:hidden">
       <button
         onClick={() => setIsOpenMenu(!isOpenMenu)}
         id="nav-toggle"
