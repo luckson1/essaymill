@@ -1,5 +1,5 @@
 
-import type { Dispatch, SetStateAction } from 'react'
+
 import { Controller, useController, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,9 @@ import BasicDateTimePicker from "~/components/datepicker";
 import { z } from 'zod';
 import moment from 'moment';
 import { type Subject } from '@prisma/client';
+import { useRouter } from 'next/navigation';
+import { api } from '~/utils/api';
+import axios from 'axios';
 export const onboardingSchema = z.object({
   firstName: z.string().nonempty("First Name Required!").min(3, {message:"Too Short!"}),
   lastName: z.string().nonempty("Last Name Required!").min(3, {message:"Too Short!"}),
@@ -33,37 +36,53 @@ export const onboardingSchema = z.object({
 });
 
 export type Values = z.infer<typeof onboardingSchema>;
-const Order = ({setIsShowForm, subjects}: { setIsShowForm: Dispatch<SetStateAction<boolean>>, subjects: Subject[]}) => {
+const Order = ({subjects}: {  subjects?: Subject[]}) => {
 
     const {
         control,
         register,
         handleSubmit,
         
-       
+       getValues,
         formState: { errors },
       } = useForm<Values>({
         resolver: zodResolver(onboardingSchema),
       });
-    
-// const price=useMemo(()=> {
+  const files= getValues('files')  
+const {mutate:onboard}=api.onboarding.onboarding.useMutation({
+  onSuccess : async (project)=> {
 
 
-// }, [])
+
+    if (!files) {
+      return null;
+    }
+    // loop through files and create a file entry in db, then create s3 signed url using file id
+    for (const file of files) {
+      const { data }: { data: { uploadUrl: string; key: string } } =
+      await axios.get(`/api/aws/fileUpload?projectId=${project.id}&type=${"customerFile"}`);
+
+      const { uploadUrl } = data;
+
+      await axios.put(uploadUrl, file);
+    }
+   
+  }
+})
 
 
 const { field } = useController({ name:"files", control});
-
+const router= useRouter()
 
   return (
-    <div className="card h-fit w-full bg-base-100  max-w-4xl my-16 shadow-lg shadow-accent mx-auto z-[1000]">
+    <div className="card h-fit w-full bg-base-100  max-w-4xl my-16 shadow-lg shadow-secondary mx-auto z-[1000]">
     <div className="card-body">
       <form
         className="grid w-full  grid-cols-1 md:grid-cols-2 justify-center md:gap-x-6 item-center mx-auto"
-        // onSubmit={handleSubmit((data) => {
-        //   console.log(data);
+        onSubmit={handleSubmit((data) => {
+          onboard(data);
          
-        // })}
+        })}
       >
         <div className="form-control w-full max-w-xs">
           <label className="label">
@@ -399,7 +418,7 @@ name="deadline"
         </div>
         <div className="form-control w-full max-w-xs mt-4">
           <button role="button" className="btn-error btn"
-          onClick={(e)=>{ setIsShowForm(false); e.preventDefault();}}
+          onClick={(e)=>{ router.back(); e.preventDefault();}}
           >
             Cancel
           </button>

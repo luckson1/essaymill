@@ -2,6 +2,8 @@
 import React, { type ReactNode, useCallback, useEffect, useState } from 'react'
 import { SideBar } from './navigation/Sidebar';
 import Nav from './navigation/Nav';
+import { usePathname } from 'next/navigation';
+import Navbar from './navigation/Navbar';
 
 const Layout = ({children}:{children:ReactNode}) => {
     const [activeMenu, setActiveMenu] = useState(true);
@@ -25,6 +27,29 @@ const Layout = ({children}:{children:ReactNode}) => {
         setActiveMenu(true);
       }
     }, [screenSize]);
+
+    const path= usePathname()
+    if (path==="/order") return (
+
+      <div className="drawer-mobile drawer  relative flex flex-row h-fit bg-base-100 font-light ">
+ 
+
+      <div
+        className={`  min-h-screen w-full " flex-2 mx-4"
+        }`}
+      >
+        <div className="fixed  w-full">
+          <Navbar/>
+        </div>
+
+        <main className="drawer-content mt-20 bg-base-100 ">
+          {children}
+        </main>
+      
+    
+      </div>
+    </div>
+    )
   return (
     <>
    
