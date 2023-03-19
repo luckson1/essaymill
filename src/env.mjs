@@ -25,6 +25,8 @@ const server = z.object({
   SECRET_KEY: z.string(),
   BUCKET_NAME: z.string(),
   REGION: z.string(),
+  EMAIL_SERVER: z.string(),
+EMAIL_FROM: z.string(),
 });
 
 /**
@@ -52,6 +54,8 @@ const processEnv = {
   SECRET_KEY: process.env. SECRET_KEY,
   BUCKET_NAME: process.env.BUCKET_NAME,
   REGION: process.env.REGION,
+  EMAIL_SERVER: process.env.EMAIL_SERVER,
+  EMAIL_FROM:process.env.EMAIL_FROM,
   
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };

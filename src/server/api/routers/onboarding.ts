@@ -18,7 +18,7 @@ export const onboardingRouter = createTRPCRouter({
   onboarding: publicProcedure
     .input(onboardingSchema)
     .mutation(async ({ input, ctx }) => {
-      const name = input.firstName + input.lastName;
+      const name = input.firstName + " " + input.lastName;
       const user = await ctx.prisma.user.create({
         data: {
           name,
