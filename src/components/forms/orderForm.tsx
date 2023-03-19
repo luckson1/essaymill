@@ -79,6 +79,7 @@ const router= useRouter()
     <div className="card-body">
       <form
         className="grid w-full  grid-cols-1 md:grid-cols-2 justify-center md:gap-x-6 item-center mx-auto"
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit((data) => {
           onboard(data);
          
