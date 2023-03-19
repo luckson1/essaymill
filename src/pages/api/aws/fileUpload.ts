@@ -26,7 +26,7 @@ try {
   const projectId= (req.query.projectId as string)
   const typeSchema=z.enum([ "customerFile" ,  "DraftFIle" , "FinalFile"])
   const type= (req.query.type as z.infer<typeof typeSchema>)
-    // make entries to image table for the product images
+    // make entries to file table for the product files
    
   if (userId) {
   const file = await prisma.file.create({
