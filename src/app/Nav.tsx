@@ -2,12 +2,13 @@
 
 import { SessionProvider } from 'next-auth/react'
 import React from 'react'
-import Navbar from './NavBar'
+import NavbarMarketing from './NavBarMarketing'
+
 
 const Nav = () => {
   return (
 <SessionProvider>
-<Navbar />
+< NavbarMarketing/>
 </SessionProvider>
   )
 }

@@ -8,7 +8,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { MdClose, MdMenu } from 'react-icons/md';
 
 
-const Navbar = () => {
+const NavbarMarketing = () => {
     const router=useRouter()
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const handleLogout = useCallback(async() => {
@@ -110,6 +110,6 @@ const Navbar = () => {
   </nav>
 
   )
-}
+};
 
-export default Navbar
+export default NavbarMarketing
