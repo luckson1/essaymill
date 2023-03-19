@@ -39,8 +39,8 @@ getValues,
         Or 
 
         <form className=" flex flex-col w-full justify-center items-center" 
-                // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        onSubmit={e=> {e.preventDefault(); signIn("email", {email: values.email, callbackUrl: "/dashboard"})}}>
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onSubmit={handleSubmit(data=> signIn("email", {email: data.email, callbackUrl: "/dashboard"}))}>
         <div className="form-control w-full max-w-xs">
           <label className="label">
             <span className="label-text">Email</span>
