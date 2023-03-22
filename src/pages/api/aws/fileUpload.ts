@@ -3,7 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import S3 from "aws-sdk/clients/s3";
 import { env } from "~/env.mjs";
 import { PrismaClient } from "@prisma/client";
-import { getServerAuthSession } from "../../../server/auth";
 import { z } from "zod";
 const prisma = new PrismaClient()
 
@@ -20,17 +19,19 @@ export default async function handler(
 ) {
 
 try { 
-  const session= await getServerAuthSession({req, res}) 
-  
-  const userId= session?.user?.id
+
+  console.log(req.query)
   const projectId= (req.query.projectId as string)
   const typeSchema=z.enum([ "customerFile" ,  "DraftFIle" , "FinalFile"])
   const type= (req.query.type as z.infer<typeof typeSchema>)
+  const name= (req.query.name as string)
+  const userId= (req.query.userId as string)
     // make entries to file table for the product files
    
-  if (userId) {
+
   const file = await prisma.file.create({
     data: {
+      name,
       userId,
       projectId,
     type
@@ -53,7 +54,7 @@ try {
       uploadUrl,
       key: Key,
     });
-  }
+  
 } catch (error) {
   console.log(error)
 }
