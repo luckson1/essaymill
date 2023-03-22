@@ -12,9 +12,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Project as ProjectCustomer } from "@prisma/client";
-import { Skeleton } from "@mui/material";
 import LoadingButton from "~/components/loadingState/Button";
 import MessagesUser from "./MessagesUser";
+import Skeleton from "../loadingState/Skeleton";
 const fileSchema = z.object({ file: z.custom<FileList>(), type:z.enum(["customerFile", "DraftFIle","FinalFile"]) });
 type Values=z.infer<typeof fileSchema>
 const ProjectCustomer = () => {

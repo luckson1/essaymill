@@ -12,9 +12,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Project as ProjectAdmin } from "@prisma/client";
-import { Skeleton } from "@mui/material";
 import LoadingButton from "~/components/loadingState/Button";
 import MessagesAdmin from "./MessagesAdmin";
+import Skeleton from "../loadingState/Skeleton";
 const fileSchema = z.object({ file: z.custom<FileList>(), type:z.enum(["customerFile", "DraftFIle","FinalFile"]) });
 type Values=z.infer<typeof fileSchema>
 const ProjectAdmin = () => {
@@ -78,7 +78,7 @@ const ProjectAdmin = () => {
      
     }
   };
-  if(isLoading)return( <div className='w-full h-[40vh]'><Skeleton/></div>)
+  if(isLoading)return( <div className='w-full h-[80vh]'><Skeleton/></div>)
   if (!project)
     return (
       <div className="mx-auto my-20 flex h-fit min-h-[40vh] w-full flex-col gap-10 rounded-lg p-8 shadow-lg shadow-accent md:w-[95%]">
