@@ -1,7 +1,7 @@
 
 'use client'
 import React from "react";
-import { signIn } from "next-auth/react";
+import { signIn, } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import {  useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -14,11 +14,11 @@ export const LoginCard = () => {
   type Value=z.infer<typeof emailSchema>
   const {register,   handleSubmit,
         
-getValues,
+
      formState: { errors }, }= useForm<Value>({
       resolver: zodResolver(emailSchema),
     });
-    const values=getValues()
+
   return (
     <div className="items-center px-10 absolute left-0 right-0 top-20 ml-auto mr-auto flex h-fit w-96 card  flex-row justify-center   rounded-lg bg-base-100 pb-7 pt-5 shadow-2xl  sm:top-28 md:w-6/12 md:gap-5 ">
       <section className="  card-body justify-center items-center">
@@ -43,7 +43,7 @@ getValues,
         onSubmit={handleSubmit(data=> signIn("email", {email: data.email, callbackUrl: "/dashboard"}))}>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text text-center">Email</span>
           </label>
           <input
             type="text"
