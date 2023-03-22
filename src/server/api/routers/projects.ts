@@ -27,6 +27,7 @@ export const projectRouter = createTRPCRouter({
           academicLevel: input.academicLevel,
           format: input.format,
           pages: input.pages,
+          
           typeOfPaper: input.typeOfPaper,
           deadline: input.deadline,
         },
@@ -43,6 +44,81 @@ export const projectRouter = createTRPCRouter({
       },
     });
     return projects;
+  }),
+  getUserUnreadMessages: protectedProcedure.query(async ({ ctx }) => {
+    const userId = ctx.session.user.id;
+    const projects = await ctx.prisma.project.findMany({
+      where: {
+        userId,
+        deleted: false,
+      },
+    
+      select: {
+        id: true,
+        orderNumber: true,
+
+        Message:{
+          where:{
+            isRead: false,
+            
+          },
+          select:{
+            id: true,
+            projectId: true,
+            body: true,
+            creator :{
+              select: {
+                name: true,
+                image: true,
+                id: true
+              }
+            }
+          }
+        }
+      }
+    });
+    const messages=projects?.map(p=> p.Message).flat()
+    
+    // check the message that were not created by the user in current session
+    const unreadMsgs=messages?.filter(message=> message.creator.id !== userId)
+
+    return unreadMsgs;
+  }),
+  getAllUnreadMessages: protectedProcedure.query(async ({ ctx }) => {
+    const userId = ctx.session.user.id;
+    const projects = await ctx.prisma.project.findMany({
+      where: {
+        deleted: false,
+      },
+    
+      select: {
+        id: true,
+        orderNumber: true,
+
+        Message:{
+          where:{
+            isRead: false,
+            
+          },
+          select:{
+            id: true,
+            projectId: true,
+            body: true,
+            creator :{
+              select: {
+                name: true,
+                image: true,
+                id: true
+              }
+            }
+          }
+        }
+      }
+    });
+    const messages=projects?.map(p=> p.Message).flat()
+        // check the message that were not created by the user in current session
+    const unreadMsgs=messages?.filter(message=> message.creator.id !== userId)
+    return unreadMsgs;
   }),
   getAllProjects: protectedProcedure.query(async ({ ctx }) => {
     const projects = await ctx.prisma.project.findMany({
@@ -63,21 +139,96 @@ export const projectRouter = createTRPCRouter({
           deleted: false,
           id: input.id,
         },
+        include: {
+          subject: true
+        }
       });
       return projects;
     }),
-  getOnerProject: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const projects = await ctx.prisma.project.findFirstOrThrow({
+  getOneProject: protectedProcedure
+  .input(z.object({ id: z.string() }))
+  .query(async ({ ctx, input }) => {
+    const projects = await ctx.prisma.project.findFirstOrThrow({
+      where: {
+       
+        deleted: false,
+        id: input.id,
+      },
+      include: {
+        subject: true
+      }
+    });
+    return projects;
+  }),
+getUserProjectsByStatus: protectedProcedure.input(z.object({status:z.enum([ "draft",
+"progress",
+  "revision",
+  "review",
+  "complete",
+  "closed",
+  "cancelled"])})).query(async ({ctx, input})=> {
+    const userId=ctx.session.user.id
+const projects= await ctx.prisma.project.findMany({
+  where: {
+    userId,
+    status: input.status
+  },
+  include: {
+    user:{
+     select: {
+      name: true
+     }
+    },
+    subject: true
+  },
+  
+})
+return projects
+  }),
+  getAllProjectsByStatus: protectedProcedure.input(z.object({status:z.enum([ "draft",
+"progress",
+  "revision",
+  "review",
+  "complete",
+  "closed",
+  "cancelled"])})).query(async ({ctx, input})=> {
+
+const projects= await ctx.prisma.project.findMany({
+  where: {
+    status: input.status,
+    deleted: false
+  },
+  include: {
+    user:{
+     select: {
+      name: true
+     }
+    },
+    subject: true
+  },
+  
+})
+return projects
+  }),
+  updateProjectStatus: protectedProcedure
+    .input(z.object({ id: z.string(), status: z.enum(["draft",
+    "progress",
+      "revision",
+      "review",
+      "complete",
+      "closed",
+      "cancelled"])}))
+    .mutation(async ({ ctx, input }) => {
+      const projects = await ctx.prisma.project.update({
         where: {
-          deleted: false,
           id: input.id,
+        },
+        data: {
+          status: input.status,
         },
       });
       return projects;
     }),
-
   deleteProject: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
