@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import React, {useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { AiOutlineDownload } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { AiOutlineDownload } from "react-icons/ai";

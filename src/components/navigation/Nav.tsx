@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { MdMenu, MdOutlineMarkChatUnread } from "react-icons/md";
 
 import React, { useCallback } from "react";
@@ -14,15 +15,15 @@ export interface NavProps {
 }
 
 const Nav = ({ activeMenu, handleMenu }: NavProps) => {
-  const handleLogout = useCallback(async() => {
+  const handleLogout = useCallback(async () => {
     await signOut();
   }, []);
-const session=useSession()
+  const session = useSession();
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
-const role=session.data?.user.role
-const router=useRouter()
+  const role = session.data?.user.role;
+  const router = useRouter();
 
   return (
     <nav
@@ -46,9 +47,22 @@ const router=useRouter()
       </button>
 
       <div className="mx-10 flex flex-row items-center justify-center gap-10 md:gap-20">
-      <button className="btn btn-sm btn-primary gap-3" onClick={()=> router.push("/order")}> <BiCartAdd className="h-6 w-6"/>Order</button>
+        <button
+          className="btn-primary btn-sm btn gap-3"
+          onClick={() => router.push("/order")}
+        >
+          {" "}
+          <BiCartAdd className="h-6 w-6" />
+          Order
+        </button>
 
-     {  role==="customer" ? <UserMessages /> : role==="admin"? <AdminMessages /> : <div>!</div>}
+        {role === "customer" ? (
+          <UserMessages />
+        ) : role === "admin" ? (
+          <AdminMessages />
+        ) : (
+          <div>!</div>
+        )}
 
         <div className="dropdown-bottom dropdown-end dropdown">
           <label tabIndex={0}>
@@ -67,7 +81,7 @@ const router=useRouter()
           </label>
           <ul
             tabIndex={0}
-            className="card dropdown-content menu rounded-box card-compact z-[1000] mt-4 w-80 Md:w-96 bg-base-100 p-2 shadow"
+            className="Md:w-96 card dropdown-content menu rounded-box card-compact z-[1000] mt-4 w-80 bg-base-100 p-2 shadow"
           >
             <div className="card-body">
               <div className="flex w-full flex-row gap-6">
@@ -91,18 +105,24 @@ const router=useRouter()
               </div>
               <li>
                 <a className="flex flex-row gap-6">
-                  <MdOutlineMarkChatUnread className="w-10 h-10 text-primary"/>
+                  <MdOutlineMarkChatUnread className="h-10 w-10 text-primary" />
                   <div className="flex flex-col">
-                  <p className="text-xl">
-                    <strong>My Inbox</strong>
-                  </p>{" "}
-                  <p>Messages</p>
+                    <p className="text-xl">
+                      <strong>My Inbox</strong>
+                    </p>{" "}
+                    <p>Messages</p>
                   </div>
                 </a>
               </li>
               <li>
-                      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-                <button className="btn btn-warning w-full" onClick={handleLogout}>Logout</button>
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+                <button
+                  className="btn-warning btn w-full"
+                  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
               </li>
             </div>
           </ul>

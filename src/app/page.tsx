@@ -1,33 +1,30 @@
-
-import Link from "next/link";
 import Landing from "./Landing";
 
-
-
-
-const Home=  () => {
-
+const Home = () => {
   return (
     <>
-   
-      <main className="flex h-fit min-h-[calc(100vh-16px)]  bg-gradient-to-b from-[#2e026d] to-[#15162c] w-full flex-col items-center justify-center  " >
-  <div className="w-full md:w-[90%] lg:w-[80%]  px-5 md:px-0">
-
-  <div className='flex flex-col w-full h-fit justify-center items-center'  >
-       <div className="flex flex-col justify-around items-center md:flex-row w-[88%]  h-fit">
-<div className="w-full md:w-3/5 flex flex-col gap-5 md:gap-10 md:mt-16 h-[40%] md:h-fit">
-  
-  <p className="text-3xl md:text-6xl text-base-100">ORIGINAL ACADEMIC
-WRITING ON DEMAND</p>
-<p className="text-xl italic text-base-100">Any Subject. Brilliant Writers. No AI or Plagiarism.</p>
-<a href={"/order"}><button className="btn btn-accent w-full max-w-xs relative my-6" > Order</button></a></div>
-     <Landing />
- </div>
-
-     
-    </div>
-  </div>
-      
+      <main className="flex h-fit min-h-[calc(100vh-16px)]  w-full flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]  ">
+        <div className="w-full px-5 md:w-[90%]  md:px-0 lg:w-[80%]">
+          <div className="flex h-fit w-full flex-col items-center justify-center">
+            <div className="flex h-fit w-[88%] flex-col items-center justify-around  md:flex-row">
+              <div className="flex h-[40%] w-full flex-col gap-5 md:mt-16 md:h-fit md:w-3/5 md:gap-10">
+                <p className="text-3xl text-base-100 md:text-6xl">
+                  ORIGINAL ACADEMIC WRITING ON DEMAND
+                </p>
+                <p className="text-xl italic text-base-100">
+                  Any Subject. Brilliant Writers. No AI or Plagiarism.
+                </p>
+                <a href={"/order"}>
+                  <button className="btn-accent btn relative my-6 w-full max-w-xs">
+                    {" "}
+                    Order
+                  </button>
+                </a>
+              </div>
+              <Landing />
+            </div>
+          </div>
+        </div>
       </main>
     </>
   );
