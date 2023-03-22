@@ -38,7 +38,9 @@ const ProjectAdmin = () => {
   
   const session = useSession();
   const userId = session.data?.user.id;
-   // tslint:disable-next-line 
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
   const role = session.data?.user.role;
 
   const [isUploading, setIsUploading] = useState(false);

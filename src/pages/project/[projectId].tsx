@@ -10,7 +10,9 @@ const Index = () => {
   const session=useSession()
   const status=session.status
   const isLoading=status==="loading"
-        // tslint:disable-next-line (for vercel build)
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
   const role=session.data?.user.role
   const admin=role==="admin"
   const customer=role==="customer"
