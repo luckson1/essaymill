@@ -12,6 +12,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: ['lh3.googleusercontent.com', "jenga.s3.eu-west-3.amazonaws.com", "jenga.s3.eu-west-3.amazonaws.com"],
+  },
 
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you

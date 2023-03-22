@@ -88,7 +88,7 @@ const Nav = ({ activeMenu, handleMenu }: NavProps) => {
                 <div className="avatar">
                   <div className="w-16 rounded-full ">
                     <Image
-                      src="/profile.jpg"
+                      src={session.data?.user.image ?? "/profile.jpg"}
                       width={"64"}
                       height="64"
                       alt="profile pic"
@@ -99,7 +99,9 @@ const Nav = ({ activeMenu, handleMenu }: NavProps) => {
                   <p className="text-2xl">
                     <strong>{session.data?.user.name ?? "User"}</strong>
                   </p>
-                  <p>Customer</p>
+                  {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                  {/* @ts-ignore */}
+                  <p>{session.data?.user.role}</p>
                   <p>{session.data?.user.email ?? "uknown"}</p>
                 </div>
               </div>
