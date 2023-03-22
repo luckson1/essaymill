@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react'
 import { BsSendCheck } from 'react-icons/bs';
 import { api } from '~/utils/api';
+import Skeleton from '../loadingState/Skeleton';
 
 const MessagesAdmin = ({projectId, userId}: {projectId: string, userId: string}) => {
     const [value, setValue] = useState("");
@@ -9,7 +10,7 @@ const MessagesAdmin = ({projectId, userId}: {projectId: string, userId: string})
      
       
       
-      const { data: messages } = api.message.getMessages.useQuery({ projectId });
+      const { data: messages , isLoading} = api.message.getMessages.useQuery({ projectId });
       const ctx = api.useContext();
       const { mutate: addMessage } = api.message.addMessage.useMutation({
         onSuccess: async () => {
@@ -29,7 +30,8 @@ if(unreadMessages && unreadMessages?.length>0) {
 unreadMessages.forEach(message=> markRead({projectId:message.projectId, creatorId:message.creator.id}))
 }
     }, [unreadMessages, markRead])
-      
+    if (isLoading) return ( <div className="card-body mx-auto w-full max-w-5xl md:p-12"><Skeleton/></div>)
+           
   return (
     <div className="card-body mx-auto w-full max-w-5xl md:p-12">
     {messages &&
