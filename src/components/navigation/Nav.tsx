@@ -18,6 +18,7 @@ const Nav = ({ activeMenu, handleMenu }: NavProps) => {
     await signOut();
   }, []);
 const session=useSession()
+      // tslint:disable-next-line (for vercel build)
 const role=session.data?.user.role
 const router=useRouter()
 
