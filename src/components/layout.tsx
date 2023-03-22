@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import Navbar from './navigation/Navbar';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { Skeleton } from '@mui/material';
+import Skeleton from './loadingState/Skeleton';
+
 
 
 const Layout = ({children}:{children:ReactNode}) => {

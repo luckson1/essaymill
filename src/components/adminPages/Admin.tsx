@@ -2,8 +2,8 @@ import moment from "moment";
 import { useRouter } from "next/navigation";
 import React, { Suspense, useCallback } from "react";
 import { z } from "zod";
-import Skeleton from "~/components/loadingState/Skeleton";
 import { api } from "~/utils/api";
+import Skeleton from "../loadingState/Skeleton";
 const statusSchema = z.enum([
   "draft",
   "progress",
