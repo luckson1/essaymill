@@ -1,14 +1,26 @@
 import { MdMenu, MdOutlineMarkChatUnread } from "react-icons/md";
 
-import React from "react";
+import React, { useCallback } from "react";
 import Image from "next/image";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { signOut, useSession } from "next-auth/react";
+import { BiCartAdd } from "react-icons/bi";
+import { useRouter } from "next/navigation";
+import UserMessages from "../customerPage/UserMessages";
+import AdminMessages from "../adminPages/AdminMessages";
 export interface NavProps {
   activeMenu?: boolean;
   handleMenu: () => void;
 }
 
 const Nav = ({ activeMenu, handleMenu }: NavProps) => {
+  const handleLogout = useCallback(async() => {
+    await signOut();
+  }, []);
+const session=useSession()
+const role=session.data?.user.role
+const router=useRouter()
+
   return (
     <nav
       className={`full fixed top-0   z-30 flex  h-16 w-full flex-row items-center justify-between   ${
@@ -31,90 +43,9 @@ const Nav = ({ activeMenu, handleMenu }: NavProps) => {
       </button>
 
       <div className="mx-10 flex flex-row items-center justify-center gap-10 md:gap-20">
-      
+      <button className="btn btn-sm btn-primary gap-3" onClick={()=> router.push("/order")}> <BiCartAdd className="h-6 w-6"/>Order</button>
 
-        <div className="dropdown dropdown-bottom dropdown-end  ">
-        <label tabIndex={0} >  <div className="tooltip tooltip-bottom" data-tip="Messages">
-          <MdOutlineMarkChatUnread className="h-8 w-8 cursor-pointer text-primary" />
-        </div></label>
-        <ul tabIndex={0} className="menu card dropdown-content p-2 shadow bg-base-100 rounded-box w-72 md:w-96 mt-4">
-          <div className="card-body">
-       <li > <a className="flex flex-row gap-6">
-        <div className="avatar">
-                  <div className="w-12 rounded-full ">
-                    <Image
-                      src="/profile.jpg"
-                      width={"48"}
-                      height="48"
-                      alt="profile pic"
-                    />
-                  </div>
-                </div>  
-                  <div className="flex flex-col">
-                  <p className="text-xl">
-                    <strong>Cy Ganderton</strong>
-                  </p>{" "}
-                  <p>You have a new Message!</p>
-                  </div>
-                </a></li>
-                <li> <a className="flex flex-row gap-6">
-        <div className="avatar">
-                  <div className="w-12 rounded-full ">
-                    <Image
-                      src="/profile.jpg"
-                      width={"48"}
-                      height="48"
-                      alt="profile pic"
-                    />
-                  </div>
-                </div>  
-                  <div className="flex flex-col">
-                  <p className="text-xl">
-                    <strong>Cy Ganderton</strong>
-                  </p>{" "}
-                  <p>You have a new Message!</p>
-                  </div>
-                </a></li>
-                <li> <a className="flex flex-row gap-6">
-        <div className="avatar">
-                  <div className="w-12 rounded-full ">
-                    <Image
-                      src="/profile.jpg"
-                      width={"48"}
-                      height="48"
-                      alt="profile pic"
-                    />
-                  </div>
-                </div>  
-                  <div className="flex flex-col">
-                  <p className="text-xl">
-                    <strong>Cy Ganderton</strong>
-                  </p>{" "}
-                  <p>You have a new Message!</p>
-                  </div>
-                </a></li>
-                <li> <a className="flex flex-row gap-6">
-        <div className="avatar">
-                  <div className="w-12 rounded-full ">
-                    <Image
-                      src="/profile.jpg"
-                      width={"48"}
-                      height="48"
-                      alt="profile pic"
-                    />
-                  </div>
-                </div>  
-                  <div className="flex flex-col">
-                  <p className="text-xl">
-                    <strong>Cy Ganderton</strong>
-                  </p>{" "}
-                  <p>You have a new Message!</p>
-                  </div>
-                </a></li>
-                <li><button className="btn btn-primary w-full text-primary-content">See all messages</button></li>
-                </div>
-        </ul>
-      </div>
+     {  role==="customer" ? <UserMessages /> : role==="admin"? <AdminMessages /> : <div>!</div>}
 
         <div className="dropdown-bottom dropdown-end dropdown">
           <label tabIndex={0}>
@@ -149,10 +80,10 @@ const Nav = ({ activeMenu, handleMenu }: NavProps) => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-2xl">
-                    <strong>Michale Roberts</strong>
+                    <strong>{session.data?.user.name ?? "User"}</strong>
                   </p>
                   <p>Customer</p>
-                  <p>michaelberts@gmail.com</p>
+                  <p>{session.data?.user.email ?? "uknown"}</p>
                 </div>
               </div>
               <li>
@@ -167,7 +98,8 @@ const Nav = ({ activeMenu, handleMenu }: NavProps) => {
                 </a>
               </li>
               <li>
-                <button className="btn btn-warning w-full">Logout</button>
+                      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+                <button className="btn btn-warning w-full" onClick={handleLogout}>Logout</button>
               </li>
             </div>
           </ul>
