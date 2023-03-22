@@ -52,9 +52,11 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = user.id;
       }
-      // tslint:disable-next-line (for vercel build)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
 if (session.user && user.role) {
-        // tslint:disable-next-line (for vercel build)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
 session.user.role = user.role;
       }
       return session;
