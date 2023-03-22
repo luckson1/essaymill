@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import type { ControllerRenderProps, Noop,} from "react-hook-form";
 import { BsCloudUpload } from "react-icons/bs";
-import { type Values } from "./forms/orderForm";
+import { type OnboardingValues } from "./forms/orderForm";
 
 const Dropzone=({ field, onBlur, }: {
   onBlur: Noop,
-  field: ControllerRenderProps<Values, "files">
+  field: ControllerRenderProps<OnboardingValues, "files">
 }) => {
   const [files, setFiles] = useState<File[]>([]);
     const { getRootProps, getInputProps, isDragActive  } = useDropzone({
