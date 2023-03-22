@@ -1,8 +1,9 @@
-import { Skeleton } from '@mui/material'
+
 import { useSession } from 'next-auth/react'
 import React from 'react'
 import ProjectAdmin from '~/components/adminPages/Project'
 import ProjectCustomer from '~/components/customerPage/Project'
+import Skeleton from '~/components/loadingState/Skeleton'
 
 
 const Index = () => {
