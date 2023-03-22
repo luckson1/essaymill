@@ -70,7 +70,7 @@ const Nav = ({ activeMenu, handleMenu }: NavProps) => {
               <div className="avatar">
                 <div className="w-8 cursor-pointer rounded-full">
                   <Image
-                    src="/profile.jpg"
+             src={session.data?.user.image ?? "/profile.jpg"}
                     width={"32"}
                     height="32"
                     alt="profile pic"

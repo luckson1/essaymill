@@ -1,7 +1,9 @@
 
 
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+
 import React, { useState } from 'react'
 import { MdOutlineMarkChatUnread } from 'react-icons/md'
 import { api } from '~/utils/api'
@@ -14,7 +16,7 @@ const UserMessages = () => {
   }, refetchInterval: 10000, refetchIntervalInBackground:true})
 
 const router=useRouter()
-
+const session = useSession();
   return (
     <div className="dropdown dropdown-bottom dropdown-end  ">
     <label tabIndex={0} >  <div className="tooltip tooltip-bottom" data-tip="Messages">
@@ -29,7 +31,7 @@ const router=useRouter()
   <div className="avatar">
             <div className="w-12 rounded-full ">
               <Image
-                src="/profile.jpg"
+          src={message.creator.image ?? "/profile.jpg"}
                 width={"48"}
                 height="48"
                 alt="profile pic"

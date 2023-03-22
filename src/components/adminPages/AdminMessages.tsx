@@ -1,5 +1,6 @@
 
 
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -7,6 +8,7 @@ import { MdOutlineMarkChatUnread } from 'react-icons/md'
 import { api } from '~/utils/api'
 
 const AdminMessages = () => {
+  const session = useSession();
   const[ messagesNumber, setMessagesNumber]=useState(0)
   //unread messages
   const{data:messages}=api.project.getAllUnreadMessages.useQuery(undefined, { onSuccess(messages) {
@@ -29,7 +31,7 @@ const AdminMessages = () => {
   <div className="avatar">
             <div className="w-12 rounded-full ">
               <Image
-                src="/profile.jpg"
+               src={message.creator.image ?? "/profile.jpg"}
                 width={"48"}
                 height="48"
                 alt="profile pic"
