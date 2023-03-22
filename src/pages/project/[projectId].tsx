@@ -13,7 +13,7 @@ const Index = () => {
   const role=session.data?.user.role
   const admin=role==="admin"
   const customer=role==="customer"
-  if(isLoading)return( <div className='w-full h-[40vh]'><Skeleton/></div>)
+  if(isLoading)return( <div className='w-full h-[80vh]'><Skeleton/></div>)
   return (
 <>
 {admin? <ProjectAdmin/> : customer?<ProjectCustomer/> : <div className='my-32 mx-32 text-red-500'>Anuthorised</div>}
