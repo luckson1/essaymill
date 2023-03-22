@@ -4,8 +4,8 @@ import {
   type NextAuthOptions,
   type DefaultSession,
 } from "next-auth";
-import GoogleProvider from 'next-auth/providers/google'
-import EmailProvider from 'next-auth/providers/email'
+import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
@@ -37,11 +37,25 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  // callbacks: {
+  //   session({ session, user }) {
+  //     if (session.user) {
+  //       session.user.id = user.id;
+  //       // session.user.role = user.role; <-- put other properties on the session here
+  //     }
+  //     return session;
+  //   },
+  // },
+  // Include user.id on session
   callbacks: {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
-        // session.user.role = user.role; <-- put other properties on the session here
+      }
+      // tslint:disable-next-line (for vercel build)
+if (session.user && user.role) {
+        // tslint:disable-next-line (for vercel build)
+session.user.role = user.role;
       }
       return session;
     },
@@ -56,7 +70,7 @@ export const authOptions: NextAuthOptions = {
     EmailProvider({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
-    })
+    }),
     /**
      * ...add more providers here.
      *
