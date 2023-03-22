@@ -18,7 +18,7 @@ const NavbarMarketing = () => {
 
       const { status } = useSession();
       const authenticated = status === "authenticated";
-      console.log(status)
+      if(authenticated) {router.push("/dashboard")}
   return (
 
     <nav className=' bg-gradient-to-b from-[#2e026d] to-[#15162c] w-full flex justify-center items-center text-base-100 z-100 h-16 fixed top-0 z-30 '>
@@ -53,15 +53,6 @@ const NavbarMarketing = () => {
                 >
                  blog
                 </Link>
-           
-            {  authenticated &&  <Link
-                  href={"/drafts"}
-                  onClick={() => setIsOpenMenu(!isOpenMenu)}
-                  className= {` w-32 text-start md:text-center hover:inline-block transition ease-in-out delay-150 cursor-pointer rounded-xl  py-2 px-4 font-light no-underline hover:-translate-y-1 hover:scale-105 hover:bg-slate-100`}
-                >
-                  Dashboard
-                </Link>
-          }
             </li>
           </ul>
         </div>

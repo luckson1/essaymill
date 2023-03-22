@@ -4,8 +4,18 @@ import { SideBar } from './navigation/Sidebar';
 import Nav from './navigation/Nav';
 import { usePathname } from 'next/navigation';
 import Navbar from './navigation/Navbar';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Skeleton } from '@mui/material';
+
 
 const Layout = ({children}:{children:ReactNode}) => {
+  const session=useSession()
+  const router= useRouter()
+  const status=session.status
+  const isauthenticated=status === 'authenticated'
+  const isUnAutheniticated= status==="unauthenticated"
+  const isLoading= status==="loading"
     const [activeMenu, setActiveMenu] = useState(true);
     const handleMenu = useCallback(() => {
       setActiveMenu((prevMenu) => !prevMenu);
@@ -29,6 +39,9 @@ const Layout = ({children}:{children:ReactNode}) => {
     }, [screenSize]);
 
     const path= usePathname()
+    if(isUnAutheniticated) router.push("/")
+    if(isLoading) return (<div className='h-screen w-screen'><Skeleton /></div>)
+
     if (path==="/order") return (
 
       <div className="drawer-mobile drawer  relative flex flex-row h-fit bg-base-100 font-light ">
@@ -53,7 +66,7 @@ const Layout = ({children}:{children:ReactNode}) => {
   return (
     <>
    
-      <div className="drawer-mobile drawer  relative flex flex-row h-fit bg-base-100 font-light ">
+{    isauthenticated &&  <div className="drawer-mobile drawer  relative flex flex-row h-fit bg-base-100 font-light ">
         {activeMenu ? (
           <div className="drawer-side fixed  z-[100] w-72 bg-base-200 bg-opacity-100">
             <SideBar handleMenu={handleMenu} />
@@ -79,7 +92,7 @@ const Layout = ({children}:{children:ReactNode}) => {
         
       
         </div>
-      </div>
+      </div>}
    
   </>
   )
