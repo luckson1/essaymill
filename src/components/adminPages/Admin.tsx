@@ -1,0 +1,89 @@
+import moment from "moment";
+import { useRouter } from "next/navigation";
+import React, { Suspense, useCallback } from "react";
+import { z } from "zod";
+import Skeleton from "~/components/loadingState/Skeleton";
+import { api } from "~/utils/api";
+const statusSchema = z.enum([
+  "draft",
+  "progress",
+  "revision",
+  "review",
+  "complete",
+  "closed",
+  "cancelled",
+]);
+
+export type Status = z.infer<typeof statusSchema>;
+const Admin = ({ status }: { status: Status }) => {
+  const { data: projects, isLoading } =
+    api.project.getAllProjectsByStatus.useQuery({ status }, {});
+  const router = useRouter();
+  // determining the remaining time
+
+  const time = useCallback((deadline: string) => {
+    const today = moment();
+
+    const due = moment(deadline);
+    const days = due.diff(today, "days");
+    const hours = due.diff(today, "hours") % 24;
+    return `${days} days, ${hours} hours`;
+  }, []);
+
+  if (isLoading)
+    return (
+      <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8">
+        {" "}
+        <Skeleton />
+      </div>
+    );
+  return (
+    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8">
+      <Suspense fallback={<Skeleton />}>
+        <div className="overflow-x-auto">
+          <table className="static table w-full max-w-4xl">
+            {/* head */}
+            <thead>
+              <tr className="hover">
+                <th>Order Number</th>
+                <th> Customer Name</th>
+                <th>Subject</th>
+                <th>Type</th>
+                <th>Pages</th>
+                <th>Status</th>
+
+                <th>Time Remaining</th>
+              </tr>
+            </thead>
+            <tbody>
+              {projects &&
+                projects.map((p) => (
+                  <tr
+                    className="hover cursor-pointer"
+                    key={p.id}
+                    onClick={() => router.push(`/project/${p.id}?id=${p.id}`)}
+                  >
+                    <td>{p.orderNumber}</td>
+                    <td>{p.user.name}</td>
+                    <td>{p.subject.name}</td>
+                    <td>{p.typeOfPaper}</td>
+                    <td>{p.pages}</td>
+                    <td>{p.status}</td>
+                    <td>{time(p.deadline)}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="btn-group">
+          <button className="btn btn-primary">«</button>
+          <button className="btn btn-primary">Page 22</button>
+          <button className="btn btn-primary">»</button>
+        </div>
+      </Suspense>
+    </div>
+  );
+};
+
+export default Admin;
