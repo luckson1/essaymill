@@ -175,5 +175,5 @@ model Payment {
     project   Project @relation(fields: [projectId], references: [id])
     projectId String
     payingEmail String
-    amount Int
+    amount Decimal
 }
