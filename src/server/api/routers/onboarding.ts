@@ -42,7 +42,7 @@ export const onboardingRouter = createTRPCRouter({
         });
         return project;
       }
- if(!existingUser) {
+
   const name = input.firstName + " " + input.lastName;
   const userCreated = await ctx.prisma.user.create({
     data: {
@@ -65,7 +65,7 @@ export const onboardingRouter = createTRPCRouter({
     },
   });
   return project;
- }
+ 
     
     }),
 });
