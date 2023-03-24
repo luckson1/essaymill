@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 export const onboardingSchema = z.object({
@@ -18,28 +19,53 @@ export const onboardingRouter = createTRPCRouter({
   onboarding: publicProcedure
     .input(onboardingSchema)
     .mutation(async ({ input, ctx }) => {
-      const name = input.firstName + " " + input.lastName;
-      const user = await ctx.prisma.user.create({
-        data: {
-          name,
-          email: input.email,
-        },
-      });
-
-      const project = await ctx.prisma.project.create({
-        data: {
-          userId: user.id,
-          topic: input.topic,
-          description: input.description,
-          subjectId: input.subjectId,
-          country: input.country,
-          academicLevel: input.academicLevel,
-          format: input.format,
-          pages: input.pages,
-          typeOfPaper: input.typeOfPaper,
-          deadline: input.deadline
-        },
-      });
-      return project;
+  
+      const existingUser= await ctx.prisma.user.findFirstOrThrow({
+        where: {
+          email: input.email
+        }
+      })
+      if (existingUser) {
+        const project = await ctx.prisma.project.create({
+          data: {
+            userId: existingUser.id,
+            topic: input.topic,
+            description: input.description,
+            subjectId: input.subjectId,
+            country: input.country,
+            academicLevel: input.academicLevel,
+            format: input.format,
+            pages: input.pages,
+            typeOfPaper: input.typeOfPaper,
+            deadline: input.deadline
+          },
+        });
+        return project;
+      }
+ if(!existingUser) {
+  const name = input.firstName + " " + input.lastName;
+  const userCreated = await ctx.prisma.user.create({
+    data: {
+      name,
+      email: input.email,
+    },
+  });
+  const project = await ctx.prisma.project.create({
+    data: {
+      userId: userCreated.id,
+      topic: input.topic,
+      description: input.description,
+      subjectId: input.subjectId,
+      country: input.country,
+      academicLevel: input.academicLevel,
+      format: input.format,
+      pages: input.pages,
+      typeOfPaper: input.typeOfPaper,
+      deadline: input.deadline
+    },
+  });
+  return project;
+ }
+    
     }),
 });
