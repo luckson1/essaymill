@@ -8,7 +8,7 @@ import { MdOutlineMarkChatUnread } from 'react-icons/md'
 import { api } from '~/utils/api'
 
 const AdminMessages = () => {
-  const session = useSession();
+
   const[ messagesNumber, setMessagesNumber]=useState(0)
   //unread messages
   const{data:messages}=api.project.getAllUnreadMessages.useQuery(undefined, { onSuccess(messages) {

@@ -54,8 +54,7 @@ export const projectRouter = createTRPCRouter({
       },
     
       select: {
-        id: true,
-        orderNumber: true,
+       
 
         Message:{
           where:{

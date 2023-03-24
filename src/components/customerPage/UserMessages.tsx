@@ -16,7 +16,7 @@ const UserMessages = () => {
   }, refetchInterval: 10000, refetchIntervalInBackground:true})
 
 const router=useRouter()
-const session = useSession();
+
   return (
     <div className="dropdown dropdown-bottom dropdown-end  ">
     <label tabIndex={0} >  <div className="tooltip tooltip-bottom" data-tip="Messages">
