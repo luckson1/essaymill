@@ -40,7 +40,7 @@ const Layout = ({children}:{children:ReactNode}) => {
     }, [screenSize]);
 
     const path= usePathname()
-    if(isUnAutheniticated) router.push("/")
+
     if(isLoading) return (<div className='h-screen w-screen'><Skeleton /></div>)
 
     if (path==="/order") return (
@@ -64,6 +64,7 @@ const Layout = ({children}:{children:ReactNode}) => {
       </div>
     </div>
     )
+    if(isUnAutheniticated) router.push("/")
   return (
     <>
    
