@@ -11,12 +11,7 @@ import Skeleton from './loadingState/Skeleton';
 
 
 const Layout = ({children}:{children:ReactNode}) => {
-  const session=useSession()
-  const router= useRouter()
-  const status=session.status
-  const isauthenticated=status === 'authenticated'
-  const isUnAutheniticated= status==="unauthenticated"
-  const isLoading= status==="loading"
+
     const [activeMenu, setActiveMenu] = useState(true);
     const handleMenu = useCallback(() => {
       setActiveMenu((prevMenu) => !prevMenu);
@@ -40,8 +35,14 @@ const Layout = ({children}:{children:ReactNode}) => {
     }, [screenSize]);
 
     const path= usePathname()
+    const session=useSession()
+    const router= useRouter()
+    const status=session.status
+    const isauthenticated=status === 'authenticated'
+    const isUnAutheniticated= status==="unauthenticated"
+    const isLoading= status==="loading"
 
-    if(isLoading) return (<div className='h-screen w-screen'><Skeleton /></div>)
+
 
     if (path==="/order") return (
 
@@ -64,6 +65,7 @@ const Layout = ({children}:{children:ReactNode}) => {
       </div>
     </div>
     )
+    if(isLoading) return (<div className='h-screen w-screen'><Skeleton /></div>)
     if(isUnAutheniticated) router.push("/")
   return (
     <>
