@@ -10,7 +10,7 @@ const MessagesAdmin = ({projectId, userId}: {projectId: string, userId: string})
      
       
       
-      const { data: messages , isLoading} = api.message.getMessages.useQuery({ projectId });
+      const { data: messages, isLoading } = api.message.getMessages.useQuery({ projectId });
       const ctx = api.useContext();
       const { mutate: addMessage } = api.message.addMessage.useMutation({
         onSuccess: async () => {
@@ -24,16 +24,28 @@ const MessagesAdmin = ({projectId, userId}: {projectId: string, userId: string})
     
     })
 
-    const{data:unreadMessages}=api.project.getAllUnreadMessages.useQuery(undefined, {refetchInterval: 10000})
+    const{data}=api.project.getAllUnreadMessages.useQuery(undefined, {refetchInterval: 10000})
     useEffect(()=> {
-if(unreadMessages && unreadMessages?.length>0) {
-unreadMessages.forEach(message=> markRead({projectId:message.projectId, creatorId:message.creator.id}))
+if(data?.unreadMsgs && data?.unreadMsgs?.length>0) {
+data?.unreadMsgs.forEach(message=> markRead({projectId:message.projectId, creatorId:message.creator.id}))
 }
-    }, [unreadMessages, markRead])
-    if (isLoading) return ( <div className="card-body mx-auto w-full max-w-5xl md:p-12"><Skeleton/></div>)
-           
+
+    }, [data, markRead])
+
+    const { data: project } = api.project.getOneProject.useQuery({
+      id:projectId ?? '',
+    });
+    if (isLoading) return ( <div className="card-body mx-auto w-full max-w-5xl md:p-12"><Skeleton /></div>)
+      
   return (
     <div className="card-body mx-auto w-full max-w-5xl md:p-12">
+        <div className="flex flex-row gap-10">
+          Order {project?.orderNumber}
+
+        <p className="h-fit max-h-16">
+           {project?.topic}
+          </p>
+        </div>
     {messages &&
       messages.map((m) => (
         <div
@@ -42,10 +54,10 @@ unreadMessages.forEach(message=> markRead({projectId:message.projectId, creatorI
           } `}
           key={m.id}
         >
-          <div className="chat-header">
+            <div className="chat-header">
             {m.creator.name}{" "}
             <time className="text-xs opacity-50">
-              {moment(m.createdAt).toString()}
+             {' '} {moment(m.createdAt).format("dddd, h:mm a")}
             </time>
           </div>
           <div
