@@ -27,10 +27,10 @@ const MessagesAdmin = ({projectId, userId}: {projectId: string, userId: string})
     const{data}=api.project.getAllUnreadMessages.useQuery(undefined, {refetchInterval: 10000})
     useEffect(()=> {
 if(data?.unreadMsgs && data?.unreadMsgs?.length>0) {
-data?.unreadMsgs.forEach(message=> markRead({projectId:message.projectId, creatorId:message.creator.id}))
+data?.unreadMsgs.forEach(message=> markRead({projectId:projectId, creatorId:message.creator.id}))
 }
 
-    }, [data, markRead])
+    }, [data, markRead, projectId])
 
     const { data: project } = api.project.getOneProject.useQuery({
       id:projectId ?? '',

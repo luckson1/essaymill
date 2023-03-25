@@ -24,16 +24,28 @@ const MessagesUser = ({projectId, userId}: {projectId: string, userId: string}) 
     
     })
 
-    const{data:unreadMessages}=api.project.getUserUnreadMessages.useQuery(undefined, {refetchInterval: 10000})
+    const{data}=api.project.getUserUnreadMessages.useQuery(undefined, {refetchInterval: 10000})
     useEffect(()=> {
-if(unreadMessages && unreadMessages?.length>0) {
-unreadMessages.forEach(message=> markRead({projectId:message.projectId, creatorId:message.creator.id}))
+if(data?.unreadMsgs && data?.unreadMsgs?.length>0) {
+data?.unreadMsgs.forEach(message=> markRead({projectId:projectId, creatorId:message.creator.id}))
 }
-    }, [unreadMessages, markRead])
+    }, [data, markRead, projectId])
+
+    const { data: project } = api.project.getOneUserProject.useQuery({
+      id:projectId,
+    });
+  
     if (isLoading) return ( <div className="card-body mx-auto w-full max-w-5xl md:p-12"><Skeleton /></div>)
       
   return (
     <div className="card-body mx-auto w-full max-w-5xl md:p-12">
+       <div className="flex flex-row gap-10">
+          Order {project?.orderNumber}
+
+        <p className="h-fit max-h-16">
+           {project?.topic}
+          </p>
+        </div>
     {messages &&
       messages.map((m) => (
         <div
@@ -45,7 +57,7 @@ unreadMessages.forEach(message=> markRead({projectId:message.projectId, creatorI
           <div className="chat-header">
             {m.creator.name}{" "}
             <time className="text-xs opacity-50">
-              {moment(m.createdAt).toString()}
+             {' '} {moment(m.createdAt).format("dddd, h:mm a")}
             </time>
           </div>
           <div
