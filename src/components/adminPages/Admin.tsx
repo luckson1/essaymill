@@ -33,7 +33,7 @@ const Admin = ({ status }: { status: Status }) => {
   const [animationParent] = useAutoAnimate();
 
   return (
-    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent}>
+    <div className="my-24 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent}>
  {isLoading && <Skeleton />}
        {!isLoading && 
        <>

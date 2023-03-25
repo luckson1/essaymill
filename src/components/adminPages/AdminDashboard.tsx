@@ -25,7 +25,7 @@ const CustomerDashboard = () => {
 
   const [animationParent] = useAutoAnimate();
   return (
-    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent} >
+    <div className="my-24 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent} >
     {isLoading && <Skeleton />}
      { !isLoading && <>
        <div className="overflow-x-auto">
@@ -56,10 +56,10 @@ const CustomerDashboard = () => {
                 
         
                     <td>{p.pages}</td>
-                    {p.Payment.at(0)?<td> p.Payment.at(0)?.amount.toString()</td>:<td>Not Paid</td> }
+                    {p.Payment.at(0)?<td>{ p.Payment.at(0)?.amount.toString()}</td>:<td>Not Paid</td> }
                     <td>{p.status}</td>
-                    <td>{moment(p.deadline).format('DD/MM/YY')}</td>
-                    <td>{moment(p.createdAt).format('DD/MM/YY')}</td>
+                    <td>{moment(p.deadline).format("MMMM Do , h:mm a")}</td>
+                    <td>{moment(p.createdAt).format(" MMMM Do,  h:mm a")}</td>
                   </tr>
                 ))}
             </tbody>
