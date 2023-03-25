@@ -33,7 +33,7 @@ if(!project) return (<div className="text-red-500">An Error Occured</div>)
                      createPayment({userId:project.userId, projectId: project.id, payingEmail, amount:price})
                   
                             // eslint-disable-next-line @typescript-eslint/no-floating-promises
-                   authorised? router.push("/progress") : signIn("email", {email: email, callbackUrl: "/dashboard"})
+                   authorised? router.push("/progress") : signIn("email", {email: email, callbackUrl: "/home"})
                    
                 });
             }}

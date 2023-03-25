@@ -18,7 +18,7 @@ const NavbarMarketing = () => {
 
       const { status } = useSession();
       const authenticated = status === "authenticated";
-      if(authenticated) {router.push("/dashboard")}
+      if(authenticated) {router.push("/home")}
   return (
 
     <nav className=' bg-gradient-to-b from-[#2e026d] to-[#15162c] w-full flex justify-center items-center text-base-100 z-100 h-16 fixed top-0 z-30 '>
