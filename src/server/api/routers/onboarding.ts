@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 export const onboardingSchema = z.object({
@@ -20,12 +20,15 @@ export const onboardingRouter = createTRPCRouter({
     .input(onboardingSchema)
     .mutation(async ({ input, ctx }) => {
   
+
+      // find if user already exists
       const existingUser= await ctx.prisma.user.findFirstOrThrow({
         where: {
           email: input.email
         }
       })
       if (existingUser) {
+        // create project
         const project = await ctx.prisma.project.create({
           data: {
             userId: existingUser.id,
@@ -43,6 +46,7 @@ export const onboardingRouter = createTRPCRouter({
         return project;
       }
 
+      //if user does not exist, create user first
   const name = input.firstName + " " + input.lastName;
   const userCreated = await ctx.prisma.user.create({
     data: {
@@ -50,6 +54,8 @@ export const onboardingRouter = createTRPCRouter({
       email: input.email,
     },
   });
+
+  // create project
   const project = await ctx.prisma.project.create({
     data: {
       userId: userCreated.id,
