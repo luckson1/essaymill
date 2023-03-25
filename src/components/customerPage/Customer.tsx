@@ -1,10 +1,11 @@
 
 
 
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import type { Project } from "@prisma/client";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import React, { Suspense, useCallback, useState } from "react";
+import React, {useCallback, useState } from "react";
 import { z } from "zod";
 import Skeleton from "~/components/loadingState/Skeleton";
 import Payments from "~/components/payments";
@@ -59,12 +60,14 @@ const pagesMultiplier = project.pages;
  const price=10 * pagesMultiplier * academicLevelMultiplier * deadlineMultiplier
  return price
   }, [])
-    if(isLoading) return    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8"> <Skeleton /></div>
+  const [animationParent] = useAutoAnimate();
   return (
-    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8">
-      <Suspense fallback={<Skeleton />}>
-       {!isPayments && <div className="overflow-x-auto">
-          <table className="static table w-full max-w-4xl">
+    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent} >
+   {isLoading && <Skeleton />}
+   {!isPayments && !isLoading && !projects && <div>No Projects Found</div>}
+   {!isPayments && !isLoading && projects && projects?.length<=0 && <div>No Projects Found</div>}
+       {!isPayments && !isLoading && projects && projects?.length>0 &&<div className="overflow-x-auto">
+          <table className=" table w-full max-w-4xl z-0">
             {/* head */}
             <thead>
               <tr className="hover">
@@ -110,7 +113,7 @@ const pagesMultiplier = project.pages;
           <button className="btn-primary btn">Page 22</button>
           <button className="btn-primary btn">»</button>
         </div>
-      </Suspense>
+   
     </div>
   );
 };

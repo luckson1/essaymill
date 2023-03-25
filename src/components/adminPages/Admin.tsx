@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import React, { Suspense, useCallback } from "react";
@@ -29,18 +30,14 @@ const Admin = ({ status }: { status: Status }) => {
     const hours = due.diff(today, "hours") % 24;
     return `${days} days, ${hours} hours`;
   }, []);
+  const [animationParent] = useAutoAnimate();
 
-  if (isLoading)
-    return (
-      <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8">
-        {" "}
-        <Skeleton />
-      </div>
-    );
   return (
-    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8">
-      <Suspense fallback={<Skeleton />}>
-        <div className="overflow-x-auto">
+    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent}>
+ {isLoading && <Skeleton />}
+       {!isLoading && 
+       <>
+       <div className="overflow-x-auto">
           <table className="static table w-full max-w-4xl">
             {/* head */}
             <thead>
@@ -81,7 +78,8 @@ const Admin = ({ status }: { status: Status }) => {
           <button className="btn btn-primary">Page 22</button>
           <button className="btn btn-primary">»</button>
         </div>
-      </Suspense>
+        </>
+    }
     </div>
   );
 };
