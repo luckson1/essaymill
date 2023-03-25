@@ -18,7 +18,7 @@ export const SideBar = ({handleMenu}: NavProps) => {
             {
               name: "Home",
               icon: AiOutlineHome,
-              path: "/dashboard"
+              path: "/home"
             },
           ],
         },
@@ -74,7 +74,7 @@ export const SideBar = ({handleMenu}: NavProps) => {
         md:hover:overflow-auto 
         pb-10'>
             { ( <> <div className='flex flex-row items-center justify-center'>
-                <Link href="/" 
+                <Link href="/home" 
              
                 className="items-center
                  gap-5 flex-row w-full ml-3 mt-4 flex text-xl font-bold
