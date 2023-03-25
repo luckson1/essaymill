@@ -7,7 +7,7 @@ import {  useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-const handleLogin= () =>  signIn("google", { callbackUrl: "/dashboard" })
+const handleLogin= () =>  signIn("google", { callbackUrl: "/home" })
 
 export const LoginCard = () => {
   const emailSchema=z.object({email: z.string().email({message: "Enter a Valid Email!"}).nonempty("Email Required!"),})
@@ -40,7 +40,7 @@ export const LoginCard = () => {
 
         <form className=" flex flex-col w-full justify-center items-center" 
                 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onSubmit={handleSubmit(data=> signIn("email", {email: data.email, callbackUrl: "/dashboard"}))}>
+        onSubmit={handleSubmit(data=> signIn("email", {email: data.email, callbackUrl: "/home"}))}>
         <div className="form-control w-full max-w-xs">
           <label className="label">
             <span className="label-text text-center">Email</span>
