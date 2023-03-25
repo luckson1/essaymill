@@ -28,7 +28,10 @@ const Admin = ({ status }: { status: Status }) => {
     const due = moment(deadline);
     const days = due.diff(today, "days");
     const hours = due.diff(today, "hours") % 24;
-    return `${days} days, ${hours} hours`;
+    const timeString=`${days} days, ${hours} hours`;
+    const isLate= days<=0 && hours<0 ? true: false
+    
+    return {timeString, isLate}
   }, []);
   const [animationParent] = useAutoAnimate();
 
@@ -66,7 +69,7 @@ const Admin = ({ status }: { status: Status }) => {
                     <td>{p.typeOfPaper}</td>
                     <td>{p.pages}</td>
                     <td>{p.status}</td>
-                    <td>{time(p.deadline)}</td>
+                    <td className={`${time(p.deadline).isLate? "text-red-500": ""}`}>{time(p.deadline).timeString}</td>
                   </tr>
                 ))}
             </tbody>
