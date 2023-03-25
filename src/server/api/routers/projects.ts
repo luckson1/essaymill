@@ -116,7 +116,8 @@ export const projectRouter = createTRPCRouter({
       (message) => message.creator.id !== userId
     );
 
-    return unreadMsgs;
+    const numberOfMessages=unreadMsgs.length
+    return {unreadMsgs, numberOfMessages};
   }),
   getAllUnreadMessages: protectedProcedure.query(async ({ ctx }) => {
     const userId = ctx.session.user.id;
@@ -153,7 +154,8 @@ export const projectRouter = createTRPCRouter({
     const unreadMsgs = messages?.filter(
       (message) => message.creator.id !== userId
     );
-    return unreadMsgs;
+    const numberOfMessages=unreadMsgs.length
+    return {unreadMsgs, numberOfMessages};
   }),
 
   getOneUserProject: protectedProcedure
@@ -185,6 +187,43 @@ export const projectRouter = createTRPCRouter({
         },
       });
       return projects;
+    }),
+
+    getProjectId: protectedProcedure
+    .input(z.object({ orderNumber: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const projectId= await ctx.prisma.project.findFirstOrThrow({
+        where: {
+          deleted: false,
+         orderNumber: input.orderNumber
+        },
+        select: {
+          
+        id: true,
+          
+        }
+     
+      });
+      return projectId;
+    }),
+    getUserProjectId: protectedProcedure
+    .input(z.object({ orderNumber: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId=ctx.session.user.id
+      const projectId= await ctx.prisma.project.findFirstOrThrow({
+        where: {
+          userId,
+          deleted: false,
+         orderNumber: input.orderNumber
+        },
+        select: {
+          
+        id: true,
+          
+        }
+     
+      });
+      return projectId;
     }),
   groupBySubjects: protectedProcedure.query(async ({ ctx }) => {
     const projects = await ctx.prisma.project.groupBy({
