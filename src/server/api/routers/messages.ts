@@ -25,36 +25,35 @@ export const messageRouter = createTRPCRouter({
         where: {
           projectId: input.projectId,
         },
-      include: {
-        creator: {
-          select: {
-            id: true,
-            name: true
-          }
-        }
-      },
-      orderBy: {
-        createdAt: 'asc'
-      }
+        include: {
+          creator: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "asc",
+        },
       });
       return message;
     }),
 
-    markAsRead: protectedProcedure
+  markAsRead: protectedProcedure
     .input(z.object({ projectId: z.string(), creatorId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const message = await ctx.prisma.message.updateMany({
         where: {
           projectId: input.projectId,
           creator: {
-            id: input.creatorId
-          }
+            id: input.creatorId,
+          },
         },
-   data: {
-    isRead: true
-   }
+        data: {
+          isRead: true,
+        },
       });
       return message;
     }),
-
 });
