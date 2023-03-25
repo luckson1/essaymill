@@ -29,9 +29,9 @@ const Admin = ({ status }: { status: Status }) => {
     const days = due.diff(today, "days");
     const hours = due.diff(today, "hours") % 24;
     const timeString=`${days} days, ${hours} hours`;
-    const isLate= days<=0 && hours<0 ? true: false
+    const isUrgent= days<=0 && hours<12 ? true: false
     
-    return {timeString, isLate}
+    return {timeString, isLate: isUrgent}
   }, []);
   const [animationParent] = useAutoAnimate();
 
