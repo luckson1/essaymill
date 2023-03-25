@@ -62,7 +62,7 @@ const pagesMultiplier = project.pages;
   }, [])
   const [animationParent] = useAutoAnimate();
   return (
-    <div className="mt-10 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent} >
+    <div className="my-24 flex h-fit w-full flex-col items-center justify-center gap-8" ref={animationParent} >
    {isLoading && <Skeleton />}
    {!isPayments && !isLoading && !projects && <div>No Projects Found</div>}
    {!isPayments && !isLoading && projects && projects?.length<=0 && <div>No Projects Found</div>}

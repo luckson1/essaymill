@@ -53,7 +53,7 @@ const ProjectCustomer = () => {
   if(isLoading)return( <div className='w-full h-[40vh]'><Skeleton/></div>)
   if (!project)
     return (
-      <div className="mx-auto my-20 flex h-fit min-h-[40vh] w-full flex-col gap-10 rounded-lg p-8 shadow-lg shadow-accent md:w-[95%]">
+      <div className="mx-auto my-24 flex h-fit min-h-[40vh] w-full flex-col gap-10 rounded-lg p-8 shadow-lg shadow-accent md:w-[95%]">
         No such Project Exists
       </div>
     );
@@ -85,7 +85,7 @@ const ctx=api.useContext()
 
   return (
     <div
-      className="mx-auto my-20 flex h-fit min-h-[40vh] w-full flex-col gap-10 rounded-lg p-8 shadow-lg shadow-accent md:w-[95%]"
+      className="mx-auto my-24 flex h-fit min-h-[40vh] w-full flex-col gap-10 rounded-lg p-8 shadow-lg shadow-accent md:w-[95%]"
       ref={animationParent}
     >
       <div
