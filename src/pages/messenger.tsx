@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useSession } from 'next-auth/react';
 import React from 'react'
 import AdminMessenger from '~/components/adminPages/AdminMessanger';
