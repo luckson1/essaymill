@@ -32,7 +32,7 @@ const {mutate:getOrderNumber, isLoading, isError}=api.project.getProjectId.useMu
      
     
     {  data?.unreadMsgs && data.unreadMsgs.map(message=> (
-      <a className="flex flex-row gap-6" key={message.id}  onClick={()=> setProjectId(message.projectId)}>
+      <a className="flex flex-row gap-6 cursor-pointer hover:bg-base-300 p2 rounded w-full" key={message.id}  onClick={()=> setProjectId(message.projectId)}>
       <div className="avatar">
                 <div className="w-12 rounded-full ">
                   <Image
@@ -47,7 +47,7 @@ const {mutate:getOrderNumber, isLoading, isError}=api.project.getProjectId.useMu
                 <p className="text-xl">
                   <strong>{message.creator.name}</strong>
                 </p>{" "}
-                <p className='h-fit max-h-16 text-xs'>{message.body}</p>
+                <p className='h-fit max-h-16 text-xs overflow-hidden'>{message.body}</p>
                 </div>
               </a>
     )) }
