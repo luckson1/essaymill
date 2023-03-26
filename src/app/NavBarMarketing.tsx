@@ -31,7 +31,7 @@ const NavbarMarketing = () => {
       />
     </div>
     <div className={`flex  flex-col w-full  md:w-[90%] md:flex-row justify-between ${isOpenMenu? "bg-neutral mt-32": "bg-inherit"} md:mt-0 md:bg-inherit px-6 md:px-0`}>
-      <div className="mt-0 mr-12 flex  flex-row  items-center justify-start py-2 w-full md:w-4/5 md:flex-col">
+      <div className="mt-0 mr-12 flex  flex-row  items-center justify-start py-2 w-full md:w-3/5 md:flex-col">
         <div
           className={`w-full mx-auto  md:mt-0 bg-inherit flex-row md:flex justify-center  md:items-center md:gap-20 ${
             isOpenMenu ? "" : "hidden"
@@ -58,12 +58,18 @@ const NavbarMarketing = () => {
         </div>
       </div>
       <div
-        className={`   flex flex-col w-full md:w-1/5 bg-inherit flex-wrap md:flex  md:items-center  md:justify-end ${
+        className={`   flex flex-col w-full md:flex-row md:w-2/5 bg-inherit md:flex  md:items-center gap-3 md:gap-5 md:justify-end ${
           isOpenMenu ? "" : "hidden"
         } z-10" py-2 `}
       >
    
-
+   <Link
+                  href={"/auth"}
+                  onClick={() => setIsOpenMenu(!isOpenMenu)}
+                  className= {` w-32 text-start md:text-center hover:inline-block transition hover:text-base-content ease-in-out delay-150 cursor-pointer rounded-xl  py-2 px-4 font-light no-underline hover:-translate-y-1 hover:scale-105 hover:bg-slate-100`}
+                >
+                 Sign Up
+                </Link>
         <button
           className="btn btn-sm btn-warning   md:animate-bounce w-32"
           onClick={
@@ -80,7 +86,7 @@ const NavbarMarketing = () => {
         >
     
         
-          {authenticated ? "Logout" : "    Login"}
+          Login
         </button>
       </div>
     </div>
