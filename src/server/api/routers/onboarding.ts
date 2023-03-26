@@ -22,7 +22,7 @@ export const onboardingRouter = createTRPCRouter({
   
 
       // find if user already exists
-      const existingUser= await ctx.prisma.user.findFirstOrThrow({
+      const existingUser= await ctx.prisma.user.findUnique({
         where: {
           email: input.email
         }
