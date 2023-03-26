@@ -51,7 +51,7 @@ export const onboardingSchema = z.object({
   typeOfPaper: z.enum(["essay", "researchPaper", "dissertation"], {
     errorMap: () => ({ message: "You must select a valid paper type!" }),
   }),
-  format: z.enum(["Chicago", "APA", "MLA", "Havard", "Other", "No", "None"], {
+  format: z.enum(["Chicago", "APA", "MLA", "Harvard", "Other", "None"], {
     errorMap: () => ({
       message: "You must select a valid  format or your paper!",
     }),

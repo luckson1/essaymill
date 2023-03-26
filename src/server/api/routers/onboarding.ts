@@ -13,7 +13,7 @@ export const onboardingSchema = z.object({
   pages: z.number(),
   academicLevel: z.enum(["undergraduate", "graduate", "phd"]),
   typeOfPaper: z.enum(["essay", "researchPaper", "dissertation"]),
-  format: z.enum(["Chicago", "APA", "MLA", "Havard", "Other", "No", "None"]),
+  format: z.enum(["Chicago", "APA", "MLA", "Harvard", "Other", "None"]),
 });
 export const onboardingRouter = createTRPCRouter({
   onboarding: publicProcedure

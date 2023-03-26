@@ -95,9 +95,8 @@ enum Format {
     Chicago
     APA
     MLA
-    Havard
+    Harvard
     Other
-    No
     None
 }
 
