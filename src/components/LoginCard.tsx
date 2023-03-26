@@ -20,23 +20,27 @@ export const LoginCard = () => {
     });
 
   return (
-    <div className="items-center px-10 absolute left-0 right-0 top-20 ml-auto mr-auto flex h-fit w-96 card  flex-row justify-center   rounded-lg bg-base-100 pb-7 pt-5 shadow-2xl  sm:top-28 md:w-6/12 md:gap-5 ">
+    <div className="items-center px-10 absolute left-0 right-0 top-20 ml-auto mr-auto flex h-fit w-96 max-w-sm card  flex-row justify-center   rounded-lg bg-base-100 pb-7 pt-5 shadow-2xl  sm:top-28 md:w-6/12 md:gap-5 ">
       <section className="  card-body justify-center items-center">
         <div className="mb-5 flex w-72 flex-row gap-3">
-          <p className="mb-3 tracking-wider text-primary">Continue With:</p>
+          <p className="mb-3 tracking-wider font-bold text-lg">Continue With:</p>
         </div>
 
-        <div className="flex flex-col w-full justify-center items-center gap-5">
-          <button
+        <div className="flex flex-col w-full justify-center items-center gap-3">
+       <div className="flex flex-col gap-2 w-full">
+        <p>   Google</p>
+        <button
           /* eslint-disable-next-line @typescript-eslint/no-misused-promises */ 
             onClick={handleLogin}
-            className=" btn btn-primary btn-outline w-full max-w-xs"
+            className=" btn btn-primary btn-outline w-full max-w-xs flex justify-between flex-row"
           >
             <p className="tracking-[5px]">Google </p>
             <FcGoogle size={"30px"} />
           </button>
+       </div>
+      
           
-        Or 
+       <p className="tracking-wider font-bold text-lg">Or</p> 
 
         <form className=" flex flex-col w-full justify-center items-center" 
                 // eslint-disable-next-line @typescript-eslint/no-misused-promises
