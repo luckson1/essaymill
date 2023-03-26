@@ -1,7 +1,7 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import React, { Suspense, useCallback } from "react";
+import React, {useCallback } from "react";
 import { z } from "zod";
 import { api } from "~/utils/api";
 import Skeleton from "../loadingState/Skeleton";
@@ -78,7 +78,7 @@ const Admin = ({ status }: { status: Status }) => {
 
         <div className="btn-group">
           <button className="btn btn-primary">«</button>
-          <button className="btn btn-primary">Page 22</button>
+          <button className="btn btn-primary">Page 1</button>
           <button className="btn btn-primary">»</button>
         </div>
         </>

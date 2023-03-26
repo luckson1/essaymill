@@ -68,7 +68,7 @@ const CustomerDashboard = () => {
 
         <div className="btn-group">
           <button className="btn btn-primary">«</button>
-          <button className="btn btn-primary">Page 22</button>
+          <button className="btn btn-primary">Page 1</button>
           <button className="btn btn-primary">»</button>
         </div>
        </>
