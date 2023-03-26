@@ -21,7 +21,7 @@ const Dropzone=({ field, onBlur, }: {
     });
 
     return (
-        <section className=" item-center   flex h-fit min-h-28   w-full flex-col rounded-md  border-2 border-dashed border-primary bg-base-100 py-4 px-2 ">
+        <section className=" item-center   flex h-fit min-h-28   w-full flex-col rounded-md  border-2 border-dashed border-[hsl(var(--bc) / var(--tw-border-opacity))] bg-base-100 py-4 px-2 ">
         <div
 
           {...getRootProps({ className: "dropzone" })}
@@ -32,7 +32,7 @@ const Dropzone=({ field, onBlur, }: {
           <div className="flex w-full flex-row items-center justify-center gap-3 align-baseline">
             <BsCloudUpload className="text-xl" />{" "}
           
-             { isDragActive? <p>Drop them here!</p>: <p>Drag & drop files here, or click to select files</p>}
+             { isDragActive? <p className="text-green-500">Drop them here!</p>: <p>Drag & drop files here, or click to select files</p>}
        
           </div>
         </div>

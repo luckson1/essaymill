@@ -181,7 +181,7 @@ await uploadToS3(project)
                   <input
                     type="text"
                     placeholder="First Name"
-                    className="input-bordered input-primary input w-full max-w-xs"
+                    className="input-bordered  input w-full max-w-xs"
                     {...register("firstName")}
                   />
                   <label className="label">
@@ -199,7 +199,7 @@ await uploadToS3(project)
                   <input
                     type="text"
                     placeholder="Last Name"
-                    className="input-bordered input-primary input w-full max-w-xs"
+                    className="input-bordered  input w-full max-w-xs"
                     {...register("lastName")}
                   />
                   <label className="label">
@@ -221,7 +221,7 @@ await uploadToS3(project)
               <input
                 type="text"
                 placeholder="Email"
-                className="input-bordered input-primary input w-full max-w-xs"
+                className="input-bordered  input w-full max-w-xs"
                 {...register("email")}
               />
               <label className="label">
@@ -244,7 +244,7 @@ await uploadToS3(project)
               <input
                 type="text"
                 placeholder="Country"
-                className="input-bordered input-primary input w-full max-w-xs"
+                className="input-bordered  input w-full max-w-xs"
                 {...register("country")}
               />
               <label className="label">
@@ -265,7 +265,7 @@ await uploadToS3(project)
                 </span>
               </label>
               <select
-                className="select-bordered select-primary select"
+                className="select-bordered  select"
                 {...register("subjectId")}
               >
                 <option value="">Subject</option>
@@ -291,7 +291,7 @@ await uploadToS3(project)
                 <span className="label-text">Pick the academic level</span>
               </label>
               <select
-                className="select-bordered select-primary select"
+                className="select-bordered  select"
                 {...register("academicLevel")}
               >
                 <option value="">Academic Level</option>
@@ -316,7 +316,7 @@ await uploadToS3(project)
                 </span>
               </label>
               <select
-                className="select-bordered select-primary select"
+                className="select-bordered  select"
                 {...register("format")}
               >
                 <option value="">Select</option>
@@ -345,7 +345,7 @@ await uploadToS3(project)
               </label>
               <input
                 type="number"
-                className="input-bordered input-primary input w-full max-w-xs"
+                className="input-bordered  input w-full max-w-xs"
                 {...register("pages", {
                   valueAsNumber: true,
                 })}
@@ -367,7 +367,7 @@ await uploadToS3(project)
                 </span>
               </label>
               <input
-                className="input-bordered input-primary input"
+                className="input-bordered  input"
                 placeholder="Topic of the Paper"
                 id="topic"
                 {...register("topic")}
@@ -426,7 +426,7 @@ await uploadToS3(project)
                 <span className="label-text">Choose the type of Paper</span>
               </label>
               <select
-                className="select-bordered select-primary select"
+                className="select-bordered  select"
                 {...register("typeOfPaper")}
               >
                 <option value="">Type of Paper</option>
@@ -447,7 +447,7 @@ await uploadToS3(project)
                 <span className="label-text">Project Description?</span>
               </label>
               <textarea
-                className="textarea-bordered textarea-primary textarea h-28"
+                className="textarea-bordered  textarea h-28"
                 placeholder="Additional information"
                 id="details"
                 {...register("description")}
