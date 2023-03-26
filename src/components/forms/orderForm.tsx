@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { api } from "~/utils/api";
 import axios from "axios";
 import { type Dispatch, type SetStateAction, useEffect, useMemo } from "react";
+import LoadingButton from "../loadingState/Button";
 export const onboardingSchema = z.object({
   firstName: z
     .string()
@@ -132,7 +133,7 @@ const {files, email} =getValues()
       await axios.put(uploadUrl, file);
     }
   }
-  const { mutate: onboard } = api.onboarding.onboarding.useMutation({
+  const { mutate: onboard, isLoading } = api.onboarding.onboarding.useMutation({
     onSuccess: async (project) => {
       setProject(project)
       setEmail(email)
@@ -144,7 +145,7 @@ await uploadToS3(project)
     },
   });
 
-  const { mutate: addProject } = api.project.addProduct.useMutation({
+  const { mutate: addProject, isLoading:isProjectLoading } = api.project.addProduct.useMutation({
     onSuccess: async (project) => {
       setProject(project)
       setEmail(email)
@@ -495,12 +496,13 @@ await uploadToS3(project)
 
           <div className="item-center mx-auto  grid w-full grid-cols-1 justify-center md:grid-cols-2 md:gap-x-6">
             <div className="form-control mt-4 w-full max-w-xs">
-              <button className="btn-primary btn" role="submit">
+            {isLoading || isProjectLoading ?  <LoadingButton /> :<button className="btn-primary btn" role="submit">
                 Submit
-              </button>
+              </button> }
             </div>
             <div className="form-control mt-4 w-full max-w-xs">
               <button
+              disabled={isLoading || isProjectLoading}
                 role="button"
                 className="btn-error btn"
                 onClick={(e) => {
