@@ -160,16 +160,16 @@ await uploadToS3(project)
   const router = useRouter();
 
   return (
-    <div className="card z-[1000] mx-auto h-fit  w-full  max-w-4xl bg-base-100 shadow-lg shadow-secondary">
+    <div className="card z-[1000] mx-auto h-fit w-full  max-w-3xl bg-base-100 shadow-lg shadow-secondary">
       <div className="card-body">
         <form
-          className=" flex w-full flex-col"
+          className=" flex w-full   flex-col"
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={handleSubmit((data) => {
            authorised?addProject(data): onboard(data);
           })}
         >
-          <div className="item-center mx-auto  grid w-full grid-cols-1 justify-center md:grid-cols-2 md:gap-x-6">
+          <div className="item-center mx-3 md:max-6  grid w-full grid-cols-1 justify-center md:grid-cols-2 md:gap-x-6">
           {!authorised &&
           <>
           <div className="form-control w-full max-w-xs">
