@@ -49,7 +49,7 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
-    role Role @default(customer)
+    role          Role      @default(customer)
     accounts      Account[]
     sessions      Session[]
     Project       Project[]
@@ -62,6 +62,8 @@ model Subject {
     id      String    @id @default(cuid())
     name    String
     Project Project[]
+
+    @@index([id])
 }
 
 model VerificationToken {
@@ -73,10 +75,10 @@ model VerificationToken {
 }
 
 enum Role {
-  customer
-  admin
-  writer
-  editor
+    customer
+    admin
+    writer
+    editor
 }
 
 enum Type {
@@ -140,12 +142,15 @@ model Project {
     updatedAt     DateTime  @updatedAt
     Message       Message[]
     Payment       Payment[]
+
+    @@index([orderNumber])
 }
 
 model File {
     id      String  @id @default(cuid())
     project Project @relation(fields: [projectId], references: [id])
-name String
+
+    name      String
     projectId String
     user      User     @relation(fields: [userId], references: [id])
     userId    String
@@ -153,26 +158,32 @@ name String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     type      fileType
+
+    @@index([id])
 }
 
 model Message {
-    id      String  @id @default(cuid())
-    body    String  @db.Text
-    project Project @relation(fields: [projectId], references: [id])
-isRead Boolean @default(false)
+    id        String   @id @default(cuid())
+    body      String   @db.Text
+    project   Project  @relation(fields: [projectId], references: [id])
+    isRead    Boolean  @default(false)
     projectId String
     creator   User     @relation(fields: [userId], references: [id])
     userId    String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@index([createdAt])
 }
 
 model Payment {
-    id        String  @id @default(cuid())
-    user      User    @relation(fields: [userId], references: [id])
-    userId    String
-    project   Project @relation(fields: [projectId], references: [id])
-    projectId String
+    id          String  @id @default(cuid())
+    user        User    @relation(fields: [userId], references: [id])
+    userId      String
+    project     Project @relation(fields: [projectId], references: [id])
+    projectId   String
     payingEmail String
-    amount Decimal
+    amount      Decimal
+
+    @@index([id])
 }
