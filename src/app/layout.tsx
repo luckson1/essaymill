@@ -3,8 +3,8 @@ import './../styles/globals.css'
 import Nav from './Nav'
 
 export const metadata = {
-  title: 'Essaysdoctor',
-  description: "Quality custom essays",
+  title: 'Custom Essay',
+  description: "Quality custom essays at an affordable price",
 }
 
 
