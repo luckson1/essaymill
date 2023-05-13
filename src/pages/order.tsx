@@ -18,7 +18,7 @@ const Order = () => {
   return (
    <div className='my-16 flex justify-center items-center w-full'>
 {  isShowForm && <OrderForm subjects={subjects} price={price} setPrice={setPrice} setProject={setProject} setEmail={setEmail} setIsShowForm={setIsShowForm} authorised={authorised}/>}
-{ !isShowForm &&  <Payments price={price} project={project} email={email} authorised={authorised}/>}
+{ !isShowForm &&  <div className='m-10'><Payments price={price} project={project} email={email} authorised={authorised}/></div>}
    </div>
   )
 }
