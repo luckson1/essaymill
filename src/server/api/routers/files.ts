@@ -14,7 +14,7 @@ const s3 = new S3({
   
 
   export const fileRouter= createTRPCRouter({
-    //fetch all files belonging to a product and include user data
+  
     getUserFiles: protectedProcedure
     .input(z.object({ projectId: z.string() }))
     .query(async ({ ctx , input}) => {
@@ -27,7 +27,7 @@ const s3 = new S3({
       
       });
 
-      // loop through files to get  metadata from s3 bucket and add the metada to files
+   
 const extendedFiles= await Promise.all(files.map(async(file)=> {
     return {
         ...file,
